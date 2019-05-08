@@ -1,0 +1,1 @@
+exports.view_ = require("Counter/Counter.jsx").Counter
