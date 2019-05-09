@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "postinstall": "bower install",
         "start": "webpack-dev-server",
         "build": "webpack"
     },
