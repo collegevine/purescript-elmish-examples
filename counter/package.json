@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "start": "npx webpack-dev-server",
-        "build": "npx webpack"
+        "start": "webpack-dev-server",
+        "build": "webpack"
     },
     "devDependencies": {
         "@babel/core": "^7.4.4",
