@@ -2,8 +2,10 @@ built/
 bower_components/
 node_modules/
 .pulp-cache/
+.vscode/
+.cache/
 output/
+dist/
 .psc*
 .purs*
 .psa*
-.vscode

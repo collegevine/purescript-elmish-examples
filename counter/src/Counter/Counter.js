@@ -1,1 +1,1 @@
-exports.view_ = require("Counter/Counter.jsx").Counter
+exports.view_ = require("/src/Counter/Counter.jsx").Counter
