@@ -1,1 +1,3 @@
-require("./Main.purs").main()
+import { main } from "~/output/Main"
+
+main()
