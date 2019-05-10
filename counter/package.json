@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "postinstall": "bower install bower.json && bower install",
+        "postinstall": "bower install",
         "start": "pulp build && concurrently \"pulp --watch build\" \"parcel index.html\""
     },
     "devDependencies": {
