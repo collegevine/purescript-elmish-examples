@@ -1,4 +1,4 @@
-module Counter.Counter( def, Message, State ) where
+module Counter( def, Message, State ) where
 
 import Prelude
 import Elmish (ComponentDef, JsCallback0, ReactComponent, Transition(..), createElement', handle, pureUpdate)
