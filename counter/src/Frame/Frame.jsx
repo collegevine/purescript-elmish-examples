@@ -8,7 +8,7 @@ export const Main = ({items, inner}) =>
       <Col md={2}>
         <ListGroup>
           {items.map(({title, isSelected, onSelect}) =>
-            <ListGroup.Item active={isSelected} onClick={onSelect} action>
+            <ListGroup.Item key={title} active={isSelected} onClick={onSelect} action>
               {title}
             </ListGroup.Item>
           )}
