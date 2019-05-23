@@ -25,13 +25,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - elmish-examples-<< parameters.directory >>-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum "packages.dhall" }}
+            - elmish-examples-<< parameters.directory >>-{{ .Branch }}-{{ checksum "<< parameters.directory >>/package-lock.json" }}-{{ checksum "<< parameters.directory >>/packages.dhall" }}
             - elmish-examples-<< parameters.directory >>-{{ .Branch }}-
 
       - run: cd "~/elmish-examples/<< parameters.directory >>" && npm install && sysconfcpus -n 2 npm run build
 
       - save_cache:
-          key: elmish-examples-<< parameters.directory >>-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum "packages.dhall" }}
+          key: elmish-examples-<< parameters.directory >>-{{ .Branch }}-{{ checksum "<< parameters.directory >>/package-lock.json" }}-{{ checksum "<< parameters.directory >>/packages.dhall" }}
           paths:
             - << parameters.directory >>/.spago
             - << parameters.directory >>/node_modules
