@@ -2,7 +2,7 @@
     "scripts": {
         "postinstall": "spago install",
         "start": "spago build && concurrently \"spago build --watch\" \"parcel index.html\"",
-        "build": "spago build && parcel build"
+        "build": "spago build && parcel build index.html"
     },
     "devDependencies": {
         "concurrently": "^4.1.0",
