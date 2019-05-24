@@ -1,17 +1,16 @@
 {
     "scripts": {
-        "postinstall": "bower install",
-        "start": "pulp build && concurrently \"pulp --watch build\" \"parcel index.html\""
+        "postinstall": "spago install",
+        "start": "spago build && concurrently \"spago build --watch\" \"parcel index.html\""
     },
     "devDependencies": {
-        "bower": "^1.8.8",
         "concurrently": "^4.1.0",
         "parcel": "^1.12.3",
-        "pulp": "^12.4.2",
         "purescript": "0.12.5",
         "purescript-psa": "0.7.3",
         "react-bootstrap": "^1.0.0-beta.8",
-        "request": "^2.88.0"
+        "request": "^2.88.0",
+        "spago": "^0.8.0"
     },
     "dependencies": {
         "react": "^16.8.6",
