@@ -1,8 +1,9 @@
 {
     "scripts": {
         "postinstall": "spago install",
-        "start": "spago build && concurrently \"spago build --watch\" \"parcel index.html\"",
-        "build": "spago build && parcel build index.html"
+        "bundle-ps": "spago bundle-module --to ./output/bundle.js",
+        "build": "bundle-ps && parcel build index.html",
+        "start": "bundle-ps && concurrently \"spago bundle-module --to ./output/bundle.js --watch\" \"parcel index.html\""
     },
     "devDependencies": {
         "concurrently": "^4.1.0",

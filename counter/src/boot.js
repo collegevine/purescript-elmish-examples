@@ -1,3 +1,3 @@
-import { main } from "~/output/Main"
+import { main } from "~/output/bundle"
 
 main()
