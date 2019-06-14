@@ -4,7 +4,7 @@ let upstream =
 let additions =
       { elmish =
           https://raw.githubusercontent.com/collegevine/purescript-elmish/master/elmish.dhall sha256:53db5768030b58bbcfc2f52ae0548b0487defff9dab9105adb19c37c3caa5109
-          "v0.1.0"
+          "v0.1.1"
       }
 
 in  upstream // additions
