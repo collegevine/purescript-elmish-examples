@@ -3,6 +3,7 @@ module Main where
 import Prelude
 
 import Counter as Counter
+import CounterArray as CounterArray
 import Data.Traversable (for)
 import Effect (Effect)
 import Effect.Aff (Aff)
@@ -12,6 +13,7 @@ import Elmish.Component (ComponentReturnCallback)
 import Elmish.Dispatch (dispatchMsgFn)
 import Frame as Frame
 import TwoCounters as TwoCounters
+import TwoCountersBifunctor as TwoCountersBifunctor
 
 main :: Effect Unit
 main = do
@@ -30,6 +32,16 @@ type Example =
 
 examples :: Array Example
 examples =
-    [ { title: "Simple counter", create: \f -> f Counter.def }
-    , { title: "Two counters", create: \f -> f TwoCounters.def }
+    [ { title: "Simple counter"
+      , create: \f -> f Counter.def
+      }
+    , { title: "Two counters"
+      , create: \f -> f TwoCounters.def
+      }
+    , { title: "Two counters via Applicative and BiFunctor"
+      , create: \f -> f TwoCountersBifunctor.def
+      }
+    , { title: "Array of counters"
+      , create: \f -> f CounterArray.def
+      }
     ]
