@@ -38,7 +38,7 @@ examples =
     , { title: "Two counters"
       , create: \f -> f TwoCounters.def
       }
-    , { title: "Two counters via Applicative and BiFunctor"
+    , { title: "Two counters via Applicative and Bifunctor"
       , create: \f -> f TwoCountersBifunctor.def
       }
     , { title: "Array of counters"
