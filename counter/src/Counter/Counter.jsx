@@ -3,7 +3,7 @@ import { Row, Col, Button, Alert, Card } from "react-bootstrap"
 
 export const Counter = props =>
   <Row>
-    <Col md={2}>
+    <Col md={3}>
       <Row><Col>Count</Col></Row>
       <Row><Col><h2>{props.count}</h2></Col></Row>
     </Col>

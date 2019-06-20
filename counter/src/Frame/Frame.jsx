@@ -5,7 +5,7 @@ export const Main = ({items, inner}) =>
   <Container>
     <Row><Col>&nbsp;</Col></Row>
     <Row>
-      <Col md={2}>
+      <Col md={3}>
         <ListGroup>
           {items.map(({title, isSelected, onSelect}) =>
             <ListGroup.Item key={title} active={isSelected} onClick={onSelect} action>
@@ -14,7 +14,7 @@ export const Main = ({items, inner}) =>
           )}
         </ListGroup>
       </Col>
-      <Col md={10}>
+      <Col md={9}>
         <Card>
           <Card.Body>{inner}</Card.Body>
         </Card>
