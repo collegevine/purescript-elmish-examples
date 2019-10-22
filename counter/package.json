@@ -9,7 +9,7 @@
         "concurrently": "^4.1.0",
         "lodash": "^4.17.13",
         "parcel": "^1.12.3",
-        "purescript": "^0.13.3",
+        "purescript": "^0.13.4",
         "purescript-psa": "0.7.3",
         "react-bootstrap": "^1.0.0-beta.8",
         "request": "^2.88.0",

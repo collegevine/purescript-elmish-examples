@@ -1,5 +1,5 @@
 let upstream =
-      https://raw.githubusercontent.com/purescript/package-sets/psc-0.13.0-20190611/src/packages.dhall sha256:2631fe1dce429e5f27324e59cc834e8e8832a5d533423952105c7446320a3648
+      https://raw.githubusercontent.com/purescript/package-sets/psc-0.13.4/src/packages.dhall sha256:205829948db98d5bab8cd74e811de9b0d2a6bf3802031904db4007ee6d773a28
 
 let additions =
       { elmish =
