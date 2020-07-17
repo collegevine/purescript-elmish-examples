@@ -6,6 +6,7 @@
     "start": "npm run bundle-ps && concurrently \"spago bundle-module --to ./output/bundle.js --watch\" \"parcel index.html\""
   },
   "devDependencies": {
+    "acorn": "^5.7.4",
     "concurrently": "^4.1.0",
     "lodash": "^4.17.19",
     "mixin-deep": ">=1.3.2",
@@ -14,6 +15,7 @@
     "purescript-psa": "0.7.3",
     "react-bootstrap": "^1.0.0-beta.8",
     "request": "^2.88.0",
+    "safer-eval": "^1.3.6",
     "set-value": "^2.0.1",
     "spago": "^0.13.1"
   },
