@@ -1,4 +1,4 @@
-module Counter( def, Message, State ) where
+module Counter( def, Message(..), State ) where
 
 import Prelude
 
