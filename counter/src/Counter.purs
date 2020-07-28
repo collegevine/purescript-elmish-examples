@@ -26,7 +26,7 @@ def =
         , H.h2 "" $ show s.count
         ]
       , H.div "col-3"
-        [ H.button_ "btn btn-primary mr-2" { onClick: handle dispatch Inc } "Inc"
-        , H.button_ "btn btn-primary" { onClick: handle dispatch Dec } "Dec"
+        [ H.button_ "btn btn-primary mb-2 mr-2" { onClick: handle dispatch Inc } "Inc"
+        , H.button_ "btn btn-primary mb-2" { onClick: handle dispatch Dec } "Dec"
         ]
       ]
