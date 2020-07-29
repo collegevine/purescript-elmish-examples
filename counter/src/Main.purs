@@ -12,6 +12,7 @@ import Elmish as Elmish
 import Elmish.Component (ComponentReturnCallback)
 import Elmish.Dispatch (dispatchMsgFn)
 import Frame as Frame
+import ProgressReport as ProgressReport
 import TwoCounters as TwoCounters
 
 main :: Effect Unit
@@ -39,5 +40,8 @@ examples =
     }
   , { title: "Array of counters"
     , create: \f -> f CounterArray.def
+    }
+  , { title: "Reporting progress"
+    , create: \f -> f ProgressReport.def
     }
   ]
