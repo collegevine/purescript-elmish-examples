@@ -5,12 +5,16 @@ jobs:
     working_directory: ~/elmish-examples
 
     docker:
-    - image: circleci/node:10.15.3-stretch
+    # We use this image for our Rails build in production, but it also works
+    # well for PureScript build, because it has Node and libsysconfcpus
+    # installed. The latter is required to simulate the number of CPUs on
+    # CircleCI, and without it the PS compiler detects all 2048 or so cores that
+    # the underlying server has, tries to spin up so many threads, and stalls.
+    - image: collegevine/rails-build
 
     parallelism: 1
 
     steps:
-    - install-libsysconfcpus
     - checkout: { path: "~/elmish-examples" }
 
     # TODO: build these in parallel. Couldn't figure out how to do it except to
@@ -36,36 +40,3 @@ commands:
             - << parameters.directory >>/.spago
             - << parameters.directory >>/node_modules
             - << parameters.directory >>/output
-
-  # Compilers such as `purs` (and Elm) try to leverage maximum parallelism by running on all
-  # available CPUs. Unfortunately, CircleCI reports the number of host OS CPUs instead of the number
-  # of available ones in our container. We use `libsysconfcpus` to limit the number of CPUs tools
-  # such as `purs` will utilize, to optimize our build time. See:
-  # https://github.com/elm/compiler/issues/1473
-  install-libsysconfcpus:
-    steps:
-      - restore_cache:
-          keys:
-            - libsysconfcpus-{{ .Branch }}
-            - libsysconfcpus-master
-      - run:
-          name: Build sysconfcpus
-          command: >
-            if [ ! -d ~/libsysconfcpus ]; then
-              cd ~;
-              buildDir=pwd;
-              git clone https://github.com/obmarg/libsysconfcpus.git;
-              cd libsysconfcpus;
-              git checkout 8cb9da6602;
-              ./configure;
-              sudo make;
-            fi
-      - save_cache:
-          key: libsysconfcpus-{{ .Branch }}
-          paths:
-            - ~/libsysconfcpus
-      - run:
-          name: Install sysconfcpus
-          command: >
-            cd ~/libsysconfcpus;
-            sudo make install;
