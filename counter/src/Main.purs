@@ -9,6 +9,7 @@ import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Console (log)
 import Elmish as Elmish
+import Elmish.Boot as Boot
 import Elmish.Component (ComponentReturnCallback)
 import Elmish.Dispatch (dispatchMsgFn)
 import Frame as Frame
@@ -20,7 +21,7 @@ main = do
   items <- for examples \e -> do
     render <- e.create Elmish.construct
     pure { title: e.title, view: render onError }
-  (Elmish.boot \_ -> Frame.frame items).mount "app" {}
+  Boot.defaultMain { elementId: "app", def: Frame.frame items }
   where
     onError = dispatchMsgFn log (const $ pure unit)
 

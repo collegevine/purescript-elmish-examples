@@ -3,12 +3,12 @@ module Main where
 import Prelude
 
 import Effect (Effect)
-import Elmish (boot)
+import Elmish.Boot (defaultMain)
 import HTMLHelloWorld (helloWorld)
 
 main :: Effect Unit
-main = boot
-    { domElementId: "app"
+main = defaultMain
+    { elementId: "app"
     , def:
         { init: pure unit
         , update: \_ _ -> pure unit
