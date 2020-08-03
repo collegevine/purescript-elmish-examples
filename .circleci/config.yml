@@ -17,6 +17,7 @@ jobs:
     # split into separate jobs, which is too much typing
     - build-example: { directory: counter }
     - build-example: { directory: html-hello-world }
+    - build-example: { directory: todo-mvc }
 
 commands:
   build-example:
