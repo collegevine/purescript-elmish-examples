@@ -21,7 +21,7 @@ jobs:
           ${{ matrix.example }}/.spago
           ${{ matrix.example }}/output
           ${{ matrix.example }}/node_modules
-        key: build-atrifacts-v1-${{ matrix.example }}-${{ hashFiles('./${{ matrix.example }}/package-lock.json', './${{ matrix.example }}/spago.dhall', './${{ matrix.example }}/packages.dhall') }}
+        key: build-atrifacts-v1-${{ matrix.example }}-${{ hashFiles(matrix.example + '/package-lock.json', matrix.example + '/spago.dhall', matrix.example + '/packages.dhall') }}
     - uses: actions/setup-node@v1
       with:
         node-version: 10.15
