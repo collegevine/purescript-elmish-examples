@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        example: [counter, html-hello-world, todo-mvc]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ${{ matrix.example }}/.spago
+          ${{ matrix.example }}/output
+          ${{ matrix.example }}/node_modules
+        key: build-atrifacts-v1-${{ matrix.example }}-${{ hashFiles(format('{0}/package-lock.json', matrix.example), format('{0}/spago.dhall', matrix.example), format('{0}/packages.dhall', matrix.example)) }}
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.15
+    - run: npm i
+      working-directory: ./${{ matrix.example }}
+    - run: npm run build
+      working-directory: ./${{ matrix.example }}
+

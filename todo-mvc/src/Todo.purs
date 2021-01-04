@@ -90,19 +90,20 @@ update state = case _ of
   StartEdit _ ->
     pure state
 
-  CommitEdit | Just { index, name: "" } <- state.editing -> do
-    fork $ pure $ Delete { index }
-    pure state
-  CommitEdit | Just e <- state.editing ->
-    pure state
-      { editing = Nothing
-      , todos =
-          state.todos
-          # Array.modifyAt e.index _ { name = e.name }
-          # fromMaybe state.todos
-      }
-  CommitEdit ->
-    pure state
+  CommitEdit
+    | Just { index, name: "" } <- state.editing -> do
+        fork $ pure $ Delete { index }
+        pure state
+    | Just e <- state.editing ->
+        pure state
+          { editing = Nothing
+          , todos =
+              state.todos
+              # Array.modifyAt e.index _ { name = e.name }
+              # fromMaybe state.todos
+          }
+    | otherwise ->
+        pure state
 
   CancelEdit ->
     pure state { editing = Nothing }

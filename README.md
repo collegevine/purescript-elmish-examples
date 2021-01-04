@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/collegevine/purescript-elmish-examples.svg?style=svg)](https://circleci.com/gh/collegevine/purescript-elmish-examples)
+![build](https://github.com/collegevine/purescript-elmish-examples/workflows/build/badge.svg?branch=master)
 
 This repo contains a few examples of UI written with the [purescript-elmish](github.com/collegevine/purescript-elmish) library.
 
