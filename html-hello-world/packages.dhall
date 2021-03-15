@@ -4,3 +4,4 @@ let upstream =
 in  upstream
   with elmish.version = "v0.5.0"
   with elmish-html.version = "v0.3.0"
+  with debug.version = "v5.0.0"
