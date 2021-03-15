@@ -7,11 +7,9 @@ import CounterArray as CounterArray
 import Data.Traversable (for)
 import Effect (Effect)
 import Effect.Aff (Aff)
-import Effect.Console (log)
 import Elmish as Elmish
 import Elmish.Boot as Boot
 import Elmish.Component (ComponentReturnCallback)
-import Elmish.Dispatch (dispatchMsgFn)
 import Frame as Frame
 import ProgressReport as ProgressReport
 import TwoCounters as TwoCounters
@@ -20,11 +18,8 @@ main :: Effect Unit
 main = do
   items <- for examples \e -> do
     render <- e.create Elmish.construct
-    pure { title: e.title, view: render onError }
+    pure { title: e.title, view: render }
   Boot.defaultMain { elementId: "app", def: Frame.frame items }
-  where
-    onError = dispatchMsgFn log (const $ pure unit)
-
 
 type Example =
   { title :: String

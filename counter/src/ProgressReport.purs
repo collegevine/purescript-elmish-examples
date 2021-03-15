@@ -10,7 +10,7 @@ import Data.Time.Duration (Milliseconds(..))
 import Effect.Aff (delay)
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Class (liftEffect)
-import Elmish (ComponentDef, bimap, forks, handle, lmap, (>#<))
+import Elmish (ComponentDef, bimap, forks, lmap)
 import Elmish.HTML.Styled as H
 import Elmish.React.DOM as R
 
@@ -47,11 +47,11 @@ def =
 
     view s dispatch = R.fragment
       [ H.div "" $
-          Counter.def.view s.counter (dispatch >#< CounterMsg)
+          Counter.def.view s.counter (dispatch <<< CounterMsg)
       , H.div "" $ case s.incSlowlyProgress of
           Nothing ->
             H.button_ "btn btn-primary"
-              { onClick: handle dispatch IncSlowlyStart }
+              { onClick: dispatch IncSlowlyStart }
               "Inc Slowly"
           Just { percent } ->
             H.div "progress" $
