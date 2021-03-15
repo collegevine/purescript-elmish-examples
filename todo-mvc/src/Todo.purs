@@ -15,7 +15,7 @@ import Effect (Effect)
 import Effect.Aff (Milliseconds(..), delay)
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Class (liftEffect)
-import Elmish (ComponentDef, DispatchMsgFn, ReactElement, Transition, fork, forkVoid, forks, handle, handleMaybe)
+import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle, handleMaybe, (<?|), (<|))
 import Elmish.Foreign (Foreign, readForeign)
 import Elmish.HTML.Styled as H
 import Elmish.React.DOM as R
@@ -135,7 +135,7 @@ update state = case _ of
     forkVoid $ liftEffect $ setRoute f
     pure state { filter = f }
 
-view :: State -> DispatchMsgFn Message -> ReactElement
+view :: State -> Dispatch Message -> ReactElement
 view state dispatch = R.fragment [header, body, footer]
   where
     header =
@@ -179,7 +179,7 @@ view state dispatch = R.fragment [header, body, footer]
             H.li "" $
               H.a_ (if f == state.filter then "selected" else "")
                 { href: "#/" <> filterRoute f
-                , onClick: handle dispatch $ SetFilter f
+                , onClick: dispatch $ SetFilter f
                 } $
                 filterName f
       ]
@@ -190,20 +190,20 @@ view state dispatch = R.fragment [header, body, footer]
         [ H.input_ "toggle"
             { type: "checkbox"
             , checked: t.checked
-            , onChange: handle dispatch \_ -> Toggle { index }
+            , onChange: dispatch <| \_ -> Toggle { index }
             }
         , H.label_ ""
-            { onDoubleClick: handle dispatch $ StartEdit { index } }
+            { onDoubleClick: dispatch $ StartEdit { index } }
             t.name
-        , H.button_ "destroy" { onClick: handle dispatch $ Delete { index } } ""
+        , H.button_ "destroy" { onClick: dispatch $ Delete { index } } ""
         ]
       , H.input_ "edit"
           { id: "edit-" <> show index
           , type: "text"
           , value: state.editing <#> _.name # fromMaybe ""
-          , onBlur: handle dispatch CancelEdit
-          , onChange: handleMaybe dispatch \e -> Edit <$> eventTargetValue e
-          , onKeyDown: handleMaybe dispatch \e ->
+          , onBlur: dispatch CancelEdit
+          , onChange: dispatch <?| \e -> Edit <$> eventTargetValue e
+          , onKeyDown: dispatch <?| \e ->
               case eventKey e of
                 Just "Enter" -> Just CommitEdit
                 Just "Escape" -> Just CancelEdit

@@ -5,7 +5,6 @@ import Prelude
 import Counter as Counter
 import Data.Array (mapWithIndex, updateAt, (!!), (..))
 import Data.Bifunctor (lmap)
-import Data.Functor.Contravariant ((>#<))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Traversable (sequence)
 import Elmish (ComponentDef)
@@ -40,5 +39,5 @@ def = { init, update, view }
         H.div_ "row mb-3" { key: show idx }
         [ H.div "col-1" $ show (idx + 1)
         , H.div "col-10" $
-            Counter.def.view childS (dispatch >#< ChildMsg idx)
+            Counter.def.view childS (dispatch <<< ChildMsg idx)
         ]

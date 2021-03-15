@@ -3,7 +3,6 @@ module TwoCounters( def, Message, State ) where
 import Prelude
 
 import Counter as Counter
-import Data.Functor.Contravariant ((>#<))
 import Elmish (ComponentDef, Transition(..), bimap, lmap)
 import Elmish.HTML.Styled as H
 
@@ -35,6 +34,6 @@ def =
 
     view s dispatch =
       H.div "row"
-      [ H.div "col-6" $ Counter.def.view s.one (dispatch >#< OneMsg)
-      , H.div "col-6" $ Counter.def.view s.two (dispatch >#< TwoMsg)
+      [ H.div "col-6" $ Counter.def.view s.one (dispatch <<< OneMsg)
+      , H.div "col-6" $ Counter.def.view s.two (dispatch <<< TwoMsg)
       ]
