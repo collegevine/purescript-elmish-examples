@@ -1,9 +1,20 @@
 { sources =
     [ "src/**/*.purs", "test/**/*.purs" ]
 , name =
-    "purescript-elmish-examples-counter: Counterexample"
+    "purescript-elmish-examples-snake"
 , dependencies =
-    [ "elmish", "elmish-html", "psci-support" ]
+    [ "aff"
+    , "arrays"
+    , "bifunctors"
+    , "datetime"
+    , "effect"
+    , "elmish-html"
+    , "elmish"
+    , "foldable-traversable"
+    , "maybe"
+    , "prelude"
+    , "psci-support"
+    ]
 , packages =
     ./packages.dhall
 }
