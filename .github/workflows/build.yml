@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        example: [counter, html-hello-world, todo-mvc]
+        example: [counter, snake, todo-mvc]
 
     steps:
     - uses: actions/checkout@v2
