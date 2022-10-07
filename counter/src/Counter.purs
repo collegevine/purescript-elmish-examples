@@ -9,7 +9,7 @@ data Message = Inc | Dec
 
 type State = { count :: Int }
 
-def :: forall m. ComponentDef m Message State
+def :: ComponentDef Message State
 def =
   { init: pure { count: 0 }
   , update

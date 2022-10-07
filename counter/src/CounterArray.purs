@@ -19,7 +19,7 @@ data Message
 type State =
   Array Counter.State
 
-def :: forall m. Monad m => ComponentDef m Message State
+def :: ComponentDef Message State
 def = { init, update, view }
   where
     init = sequence do
