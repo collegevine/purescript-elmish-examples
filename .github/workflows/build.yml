@@ -21,10 +21,10 @@ jobs:
           ${{ matrix.example }}/.spago
           ${{ matrix.example }}/output
           ${{ matrix.example }}/node_modules
-        key: build-atrifacts-v1-${{ matrix.example }}-${{ hashFiles(format('{0}/package-lock.json', matrix.example), format('{0}/spago.dhall', matrix.example), format('{0}/packages.dhall', matrix.example)) }}
+        key: build-atrifacts-v2-${{ matrix.example }}-${{ hashFiles(format('{0}/package-lock.json', matrix.example), format('{0}/spago.dhall', matrix.example), format('{0}/packages.dhall', matrix.example)) }}
     - uses: actions/setup-node@v1
       with:
-        node-version: 10.15
+        node-version: 16.15
     - run: npm i
       working-directory: ./${{ matrix.example }}
     - run: npm run build
