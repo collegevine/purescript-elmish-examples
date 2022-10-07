@@ -5,8 +5,6 @@
 , dependencies =
     [ "aff"
     , "arrays"
-    , "bifunctors"
-    , "datetime"
     , "effect"
     , "elmish-html"
     , "elmish"
@@ -14,7 +12,6 @@
     , "foreign-object"
     , "maybe"
     , "prelude"
-    , "psci-support"
     , "web-dom"
     , "web-events"
     , "web-html"
