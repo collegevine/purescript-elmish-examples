@@ -12,8 +12,8 @@ import Data.Array as Array
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
-import Effect.Aff (Milliseconds(..), delay)
-import Effect.Aff.Class (class MonadAff, liftAff)
+import Effect.Aff (Aff, Milliseconds(..), delay)
+import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
 import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle, handleMaybe, (<?|), (<|))
 import Elmish.Foreign (Foreign, readForeign)
@@ -29,7 +29,7 @@ import Web.HTML.HTMLElement (focus, fromElement)
 import Web.HTML.Location (hash, setHash)
 import Web.HTML.Window (document, location, toEventTarget)
 
-def :: forall m. MonadAff m => ComponentDef m Message State
+def :: ComponentDef Message State
 def = { init, update, view }
 
 data Message
@@ -59,7 +59,7 @@ type Todo =
 data Filter = All | Checked | Unchecked
 derive instance eqFilter :: Eq Filter
 
-init :: forall m. MonadAff m => Transition m Message State
+init :: Transition Message State
 init = do
   fork $ liftEffect readRoute
   forks watchRoute
@@ -70,7 +70,7 @@ init = do
     , todos: []
     }
 
-update :: forall m. MonadAff m => State -> Message -> Transition m Message State
+update :: State -> Message -> Transition Message State
 update state = case _ of
   CreateNew ->
     pure state
@@ -234,7 +234,7 @@ filterRoute = case _ of
   Checked -> "completed"
   Unchecked -> "active"
 
-watchRoute :: forall m. MonadAff m => (Message -> Effect Unit) -> m Unit
+watchRoute :: (Message -> Effect Unit) -> Aff Unit
 watchRoute dispatch = liftEffect do
   listener <- eventListener \_ -> readRoute >>= dispatch
   target <- toEventTarget <$> window

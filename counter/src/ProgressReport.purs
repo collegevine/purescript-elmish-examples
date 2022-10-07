@@ -8,7 +8,7 @@ import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Time.Duration (Milliseconds(..))
 import Effect.Aff (delay)
-import Effect.Aff.Class (class MonadAff, liftAff)
+import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
 import Elmish (ComponentDef, bimap, forks, lmap)
 import Elmish.HTML.Styled as H
@@ -25,7 +25,7 @@ type State =
   , incSlowlyProgress :: Maybe { percent :: Int }
   }
 
-def :: forall m. MonadAff m => ComponentDef m Message State
+def :: ComponentDef Message State
 def =
   { init: do
       counter <- Counter.def.init # lmap CounterMsg

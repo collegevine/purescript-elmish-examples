@@ -13,7 +13,6 @@
     , "foldable-traversable"
     , "maybe"
     , "prelude"
-    , "psci-support"
     ]
 , packages =
     ./packages.dhall

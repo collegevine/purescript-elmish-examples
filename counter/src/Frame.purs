@@ -9,7 +9,6 @@ import Prelude
 
 import Data.Array (head, mapWithIndex, (!!))
 import Data.Maybe (Maybe, maybe)
-import Effect.Aff (Aff)
 import Elmish (ComponentDef, ReactElement)
 import Elmish.HTML.Styled as H
 import Elmish.React.DOM as R
@@ -26,13 +25,13 @@ type State =
 
 data Message = SelectIndex Int
 
-frame :: Array Item -> ComponentDef Aff Message State
+frame :: Array Item -> ComponentDef Message State
 frame items =
   { init: pure
     { selectedIndex: 0
     , selectedItem: head items
     }
-  , update: \s (SelectIndex idx) -> pure
+  , update: \_ (SelectIndex idx) -> pure
     { selectedIndex: idx
     , selectedItem: items !! idx
     }
