@@ -13,8 +13,6 @@
     , "foldable-traversable"
     , "maybe"
     , "prelude"
-    , "psci-support"
-    , "undefined-is-not-a-problem"
     ]
 , packages =
     ./packages.dhall
