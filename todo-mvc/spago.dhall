@@ -9,7 +9,6 @@
     , "elmish-html"
     , "elmish"
     , "foldable-traversable"
-    , "foreign-object"
     , "maybe"
     , "prelude"
     , "web-dom"

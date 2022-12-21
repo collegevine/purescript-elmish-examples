@@ -15,11 +15,9 @@ import Effect (Effect)
 import Effect.Aff (Aff, Milliseconds(..), delay)
 import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
-import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle, handleMaybe, (<?|), (<|))
-import Elmish.Foreign (Foreign, readForeign)
+import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle, (<?|), (<|))
+import Elmish.HTML.Events as E
 import Elmish.HTML.Styled as H
-import Elmish.React.DOM as R
-import Foreign.Object as Obj
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.Event.EventTarget (addEventListener, eventListener)
 import Web.HTML (window)
@@ -136,7 +134,7 @@ update state = case _ of
     pure state { filter = f }
 
 view :: State -> Dispatch Message -> ReactElement
-view state dispatch = R.fragment [header, body, footer]
+view state dispatch = H.fragment [header, body, footer]
   where
     header =
       H.header "header"
@@ -144,8 +142,8 @@ view state dispatch = R.fragment [header, body, footer]
       , H.input_ "new-todo"
           { type: "text"
           , value: state.newTodoName
-          , onChange: handleMaybe dispatch \e -> NewNameChanged <$> eventTargetValue e
-          , onKeyPress: handleMaybe dispatch \e -> if eventKey e == Just "Enter" then Just CreateNew else Nothing
+          , onChange: dispatch <| NewNameChanged <<< E.inputText
+          , onKeyPress: dispatch <?| \(E.KeyboardEvent e) -> if e.key == "Enter" then Just CreateNew else Nothing
           , placeholder: "What needs to be done?"
           , autoFocus: true
           }
@@ -172,14 +170,14 @@ view state dispatch = R.fragment [header, body, footer]
       H.footer "footer"
       [ H.span "todo-count"
         [ H.strong "" $ show uncheckedCount
-        , R.text " items left"
+        , H.text " items left"
         ]
       , H.ul "filters" $
           [All, Unchecked, Checked] <#> \f ->
             H.li "" $
               H.a_ (if f == state.filter then "selected" else "")
                 { href: "#/" <> filterRoute f
-                , onClick: dispatch $ SetFilter f
+                , onClick: dispatch <| SetFilter f
                 } $
                 filterName f
       ]
@@ -193,20 +191,20 @@ view state dispatch = R.fragment [header, body, footer]
             , onChange: dispatch <| \_ -> Toggle { index }
             }
         , H.label_ ""
-            { onDoubleClick: dispatch $ StartEdit { index } }
+            { onDoubleClick: dispatch <| StartEdit { index } }
             t.name
-        , H.button_ "destroy" { onClick: dispatch $ Delete { index } } ""
+        , H.button_ "destroy" { onClick: dispatch <| Delete { index } } ""
         ]
       , H.input_ "edit"
           { id: "edit-" <> show index
           , type: "text"
           , value: state.editing <#> _.name # fromMaybe ""
-          , onBlur: dispatch CancelEdit
-          , onChange: dispatch <?| \e -> Edit <$> eventTargetValue e
-          , onKeyDown: dispatch <?| \e ->
-              case eventKey e of
-                Just "Enter" -> Just CommitEdit
-                Just "Escape" -> Just CancelEdit
+          , onBlur: dispatch <| CancelEdit
+          , onChange: dispatch <| Edit <<< E.inputText
+          , onKeyDown: dispatch <?| \(E.KeyboardEvent e) ->
+              case e.key of
+                "Enter" -> Just CommitEdit
+                "Escape" -> Just CancelEdit
                 _ -> Nothing
           }
       ]
@@ -252,14 +250,3 @@ readRoute = do
 setRoute :: Filter -> Effect Unit
 setRoute f =
   window >>= location >>= setHash ("/" <> filterRoute f)
-
-eventTargetValue :: Foreign -> Maybe String
-eventTargetValue =
-  readForeign
-  >=> Obj.lookup "target" >=> readForeign
-  >=> Obj.lookup "value" >=> readForeign
-
-eventKey :: Foreign -> Maybe String
-eventKey =
-  readForeign
-  >=> Obj.lookup "key" >=> readForeign
