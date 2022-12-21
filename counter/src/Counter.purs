@@ -2,7 +2,7 @@ module Counter( def, Message(..), State ) where
 
 import Prelude
 
-import Elmish (ComponentDef)
+import Elmish (ComponentDef, (<|))
 import Elmish.HTML.Styled as H
 
 data Message = Inc | Dec
@@ -26,7 +26,7 @@ def =
         , H.h2 "" $ show s.count
         ]
       , H.div "col-3"
-        [ H.button_ "btn btn-primary mb-2 mr-2" { onClick: dispatch Inc } "Inc"
-        , H.button_ "btn btn-primary mb-2" { onClick: dispatch Dec } "Dec"
+        [ H.button_ "btn btn-primary mb-2 mr-2" { onClick: dispatch <| Inc } "Inc"
+        , H.button_ "btn btn-primary mb-2" { onClick: dispatch <| Dec } "Dec"
         ]
       ]
