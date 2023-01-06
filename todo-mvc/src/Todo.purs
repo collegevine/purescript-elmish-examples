@@ -15,7 +15,7 @@ import Effect (Effect)
 import Effect.Aff (Aff, Milliseconds(..), delay)
 import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
-import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle, (<?|), (<|))
+import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, (<?|), (<|))
 import Elmish.HTML.Events as E
 import Elmish.HTML.Styled as H
 import Web.DOM.NonElementParentNode (getElementById)
@@ -155,7 +155,7 @@ view state dispatch = H.fragment [header, body, footer]
           { id: "toggle-all"
           , type: "checkbox"
           , checked: allChecked
-          , onChange: handle dispatch \_ -> ToggleAll $ not allChecked
+          , onChange: dispatch <| ToggleAll $ not allChecked
           }
       , H.label_ "" { htmlFor: "toggle-all" } "Mark all as complete"
 
@@ -188,7 +188,7 @@ view state dispatch = H.fragment [header, body, footer]
         [ H.input_ "toggle"
             { type: "checkbox"
             , checked: t.checked
-            , onChange: dispatch <| \_ -> Toggle { index }
+            , onChange: dispatch <| Toggle { index }
             }
         , H.label_ ""
             { onDoubleClick: dispatch <| StartEdit { index } }

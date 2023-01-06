@@ -11,7 +11,6 @@ import Data.Array (head, mapWithIndex, (!!))
 import Data.Maybe (Maybe, maybe)
 import Elmish (ComponentDef, ReactElement, (<|))
 import Elmish.HTML.Styled as H
-import Elmish.React.DOM as R
 
 type Item =
     { title :: String
@@ -47,6 +46,6 @@ frame items =
         , H.div "col-9" $
             H.div "card" $
               H.div "card-body" $
-                maybe R.empty _.view s.selectedItem
+                maybe H.empty _.view s.selectedItem
         ]
   }
