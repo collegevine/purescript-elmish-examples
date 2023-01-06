@@ -3,5 +3,5 @@ let upstream =
         sha256:81067801c9959b544ac870b392b8520d516b32bddaf9c98b32d40037200c071f
 
 in  upstream
-  with elmish.version = "v0.9.0"
-  with elmish-html.version = "v0.8.0"
+  with elmish.version = "v0.9.3"
+  with elmish-html.version = "v0.8.1"
