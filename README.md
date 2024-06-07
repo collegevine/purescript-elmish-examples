@@ -1,4 +1,4 @@
-![build](https://github.com/collegevine/purescript-elmish-examples/workflows/build/badge.svg?branch=master)
+[![build](https://github.com/collegevine/purescript-elmish-examples/actions/workflows/build.yml/badge.svg)](https://github.com/collegevine/purescript-elmish-examples/actions/workflows/build.yml)
 
 This repo contains a few examples of UI written with the [purescript-elmish](https://github.com/collegevine/purescript-elmish) library.
 
