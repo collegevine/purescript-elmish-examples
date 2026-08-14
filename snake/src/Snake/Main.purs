@@ -1,4 +1,4 @@
-module Main where
+module Snake.Main where
 
 import Prelude
 

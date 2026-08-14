@@ -1,0 +1,14 @@
+package:
+  name: snake
+  dependencies:
+    - arrays
+    - effect
+    - elmish
+    - elmish-html
+    - maybe
+    - prelude
+  bundle:
+    module: Snake.Main
+    platform: browser
+    type: module
+    outfile: output/bundle.js

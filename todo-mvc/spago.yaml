@@ -1,0 +1,19 @@
+package:
+  name: todo-mvc
+  dependencies:
+    - aff
+    - arrays
+    - effect
+    - elmish
+    - elmish-html
+    - foldable-traversable
+    - maybe
+    - prelude
+    - web-dom
+    - web-events
+    - web-html
+  bundle:
+    module: TodoMvc.Main
+    platform: browser
+    type: module
+    outfile: output/bundle.js

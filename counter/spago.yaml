@@ -1,0 +1,18 @@
+package:
+  name: counter
+  dependencies:
+    - aff
+    - arrays
+    - bifunctors
+    - datetime
+    - effect
+    - elmish
+    - elmish-html
+    - foldable-traversable
+    - maybe
+    - prelude
+  bundle:
+    module: Counter.Main
+    platform: browser
+    type: module
+    outfile: output/bundle.js

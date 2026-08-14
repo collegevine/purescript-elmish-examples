@@ -9,24 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        example: [counter, snake, todo-mvc]
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
+    - uses: actions/checkout@v4
+    - uses: actions/cache@v4
       with:
         path: |
-          ${{ matrix.example }}/.spago
-          ${{ matrix.example }}/output
-          ${{ matrix.example }}/node_modules
-        key: build-atrifacts-v2-${{ matrix.example }}-${{ hashFiles(format('{0}/package-lock.json', matrix.example), format('{0}/spago.dhall', matrix.example), format('{0}/packages.dhall', matrix.example)) }}
-    - uses: actions/setup-node@v1
+          .spago
+          output
+          node_modules
+        key: build-artifacts-v1-${{ hashFiles('package-lock.json', 'spago.lock', 'spago.yaml', '*/spago.yaml') }}
+    - uses: actions/setup-node@v4
       with:
-        node-version: 16.15
+        node-version-file: .nvmrc
     - run: npm i
-      working-directory: ./${{ matrix.example }}
     - run: npm run build
-      working-directory: ./${{ matrix.example }}
-

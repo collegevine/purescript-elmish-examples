@@ -1,4 +1,4 @@
-module Main where
+module Counter.Main where
 
 import Prelude
 

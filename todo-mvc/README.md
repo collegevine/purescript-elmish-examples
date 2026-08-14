@@ -6,6 +6,10 @@ While Elmish cannot be actually submitted to be one of the official TodoMVC exam
 
 ## Building and running
 
+All commands run from the repository root. Requires Node 22.5.0 or newer
+(Spago 1.x).
+
 * To initialize: `npm install`
-* To build: `npm run build`
-* To start a dev server with autoreloading changes: `npm start`
+* To build every example: `npm run build`
+* To start a dev server: `npm run start -- todo-mvc`, then open
+  http://localhost:8080/

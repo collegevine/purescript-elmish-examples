@@ -9,11 +9,15 @@ complex UIs out of simpler ones, using an increment / decrement counter as base.
 * `CounterArray.purs` - composing an array of counters
 * `ProgressReport.purs` - extending the base example with a "slow increment"
   button, which demonstrates reporting progress of a background task
-* `Frame.purs` and `Main.purs` - not intended to be part of the examples, just a
-  way to bring all the above examples together on one screen
+* `Frame.purs` and `Counter/Main.purs` - not intended to be part of the
+  examples, just a way to bring all the above examples together on one screen
 
 ## Building and running
 
+All commands run from the repository root. Requires Node 22.5.0 or newer
+(Spago 1.x).
+
 * To initialize: `npm install`
-* To build: `npm run build`
-* To start a dev server with autoreloading changes: `npm start`
+* To build every example: `npm run build`
+* To start a dev server: `npm run start -- counter`, then open
+  http://localhost:8080/

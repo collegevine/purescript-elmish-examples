@@ -1,4 +1,4 @@
-module Main where
+module TodoMvc.Main where
 
 import Prelude
 
