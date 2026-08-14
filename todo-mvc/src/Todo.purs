@@ -15,7 +15,8 @@ import Effect (Effect)
 import Effect.Aff (Aff, Milliseconds(..), delay)
 import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
-import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, (<?|), (<|))
+import Elmish (ComponentDef, Dispatch, ReactElement, Transition, fork, forkVoid, forks, handle)
+import Elmish.Component (Command)
 import Elmish.HTML.Events as E
 import Elmish.HTML.Styled as H
 import Web.DOM.NonElementParentNode (getElementById)
@@ -142,8 +143,8 @@ view state dispatch = H.fragment [header, body, footer]
       , H.input_ "new-todo"
           { type: "text"
           , value: state.newTodoName
-          , onChange: dispatch <| NewNameChanged <<< E.inputText
-          , onKeyPress: dispatch <?| \(E.KeyboardEvent e) -> if e.key == "Enter" then Just CreateNew else Nothing
+          , onChange: handle $ dispatch <<< NewNameChanged <<< E.inputText
+          , onKeyPress: handle \(E.KeyboardEvent e) -> when (e.key == "Enter") $ dispatch CreateNew
           , placeholder: "What needs to be done?"
           , autoFocus: true
           }
@@ -155,7 +156,7 @@ view state dispatch = H.fragment [header, body, footer]
           { id: "toggle-all"
           , type: "checkbox"
           , checked: allChecked
-          , onChange: dispatch <| ToggleAll $ not allChecked
+          , onChange: handle \_ -> dispatch $ ToggleAll $ not allChecked
           }
       , H.label_ "" { htmlFor: "toggle-all" } "Mark all as complete"
 
@@ -177,7 +178,7 @@ view state dispatch = H.fragment [header, body, footer]
             H.li "" $
               H.a_ (if f == state.filter then "selected" else "")
                 { href: "#/" <> filterRoute f
-                , onClick: dispatch <| SetFilter f
+                , onClick: handle \_ -> dispatch $ SetFilter f
                 } $
                 filterName f
       ]
@@ -188,24 +189,24 @@ view state dispatch = H.fragment [header, body, footer]
         [ H.input_ "toggle"
             { type: "checkbox"
             , checked: t.checked
-            , onChange: dispatch <| Toggle { index }
+            , onChange: handle \_ -> dispatch $ Toggle { index }
             }
         , H.label_ ""
-            { onDoubleClick: dispatch <| StartEdit { index } }
+            { onDoubleClick: handle \_ -> dispatch $ StartEdit { index } }
             t.name
-        , H.button_ "destroy" { onClick: dispatch <| Delete { index } } ""
+        , H.button_ "destroy" { onClick: handle \_ -> dispatch $ Delete { index } } ""
         ]
       , H.input_ "edit"
           { id: "edit-" <> show index
           , type: "text"
           , value: state.editing <#> _.name # fromMaybe ""
-          , onBlur: dispatch <| CancelEdit
-          , onChange: dispatch <| Edit <<< E.inputText
-          , onKeyDown: dispatch <?| \(E.KeyboardEvent e) ->
+          , onBlur: handle \_ -> dispatch CancelEdit
+          , onChange: handle $ dispatch <<< Edit <<< E.inputText
+          , onKeyDown: handle \(E.KeyboardEvent e) ->
               case e.key of
-                "Enter" -> Just CommitEdit
-                "Escape" -> Just CancelEdit
-                _ -> Nothing
+                "Enter" -> dispatch CommitEdit
+                "Escape" -> dispatch CancelEdit
+                _ -> pure unit
           }
       ]
       where
@@ -232,8 +233,8 @@ filterRoute = case _ of
   Checked -> "completed"
   Unchecked -> "active"
 
-watchRoute :: (Message -> Effect Unit) -> Aff Unit
-watchRoute dispatch = liftEffect do
+watchRoute :: Command Aff Message
+watchRoute { dispatch } = liftEffect do
   listener <- eventListener \_ -> readRoute >>= dispatch
   target <- toEventTarget <$> window
   addEventListener hashchange listener false target

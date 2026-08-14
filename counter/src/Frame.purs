@@ -9,7 +9,7 @@ import Prelude
 
 import Data.Array (head, mapWithIndex, (!!))
 import Data.Maybe (Maybe, maybe)
-import Elmish (ComponentDef, ReactElement, (<|))
+import Elmish (ComponentDef, ReactElement, handle)
 import Elmish.HTML.Styled as H
 
 type Item =
@@ -41,7 +41,7 @@ frame items =
             H.div "list-group" $
               items # mapWithIndex \idx item ->
                 H.div_ ("list-group-item " <> if idx == s.selectedIndex then "active" else "")
-                  { onClick: dispatch <| SelectIndex idx }
+                  { onClick: handle \_ -> dispatch $ SelectIndex idx }
                   item.title
         , H.div "col-9" $
             H.div "card" $

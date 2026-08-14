@@ -9,7 +9,6 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Traversable (sequence)
 import Elmish (ComponentDef)
 import Elmish.HTML.Styled as H
-import Elmish.React.DOM as R
 
 type Index = Int
 
@@ -34,7 +33,7 @@ def = { init, update, view }
         Nothing ->
           pure children
 
-    view children dispatch = R.fragment $
+    view children dispatch = H.fragment $
       children # mapWithIndex \idx childS ->
         H.div_ "row mb-3" { key: show idx }
         [ H.div "col-1" $ show (idx + 1)

@@ -1,6 +1,3 @@
 workspace:
   packageSet:
-    registry: 0.0.1
-  extraPackages:
-    elmish: 0.9.3
-    elmish-html: 0.8.1
+    registry: 80.5.0
