@@ -8,7 +8,7 @@ import Data.Traversable (for)
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Elmish as Elmish
-import Elmish.HTML.Boot as Boot
+import Elmish.HTML.React17.Boot as Boot
 import Elmish.Component (ComponentReturnCallback)
 import Frame as Frame
 import ProgressReport as ProgressReport

@@ -1,5 +1,7 @@
 # A counterexample
 
+**Explicitly referencing React 17**, not React 19 like other examples.
+
 A set of progressively more complex examples, demonstrating ways to compose
 complex UIs out of simpler ones, using an increment / decrement counter as base.
 
