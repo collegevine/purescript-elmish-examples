@@ -18,9 +18,20 @@ jobs:
           .spago
           output
           node_modules
+          ~/.cache/ms-playwright
         key: build-artifacts-v1-${{ hashFiles('package-lock.json', 'spago.lock', 'spago.yaml', '*/spago.yaml') }}
     - uses: actions/setup-node@v4
       with:
         node-version-file: .nvmrc
+
     - run: npm i
     - run: npm run build
+
+    - run: npx playwright install --with-deps chromium
+    - run: npm test
+    - uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 7

@@ -10,8 +10,10 @@ Requires Node 22.5.0 or newer (Spago 1.x).
 npm install               # install dependencies for the whole workspace
 npm run build             # build and bundle all examples
 npm run start -- counter  # dev server, then open http://localhost:8080/
+npm test                  # smoke-test every example in a browser
+npm test -- --headed      # test with a non-headless browser, so it's visible
 ```
 
 `start` takes the name of any example: `counter`, `snake` or `todo-mvc`.
 
-More docs are forthcoming.
+The tests are Playwright, and live outside the examples in `tests/`. The idea is that the tests are completely black-box. They're supposed to test the whole setup as a whole, make sure Elmish itself works correctly, as well as Elmish.HTML. Each test starts its example via `npm start` and drives it in a headless browser. First run needs `npx playwright install chromium`.
