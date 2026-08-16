@@ -61,7 +61,7 @@
     },
     "package_set": {
       "address": {
-        "registry": "80.5.0"
+        "registry": "80.7.0"
       },
       "compiler": ">=0.15.15 <0.16.0",
       "content": {
@@ -177,8 +177,9 @@
         "either": "6.1.0",
         "elmish": "0.15.0",
         "elmish-enzyme": "0.1.1",
-        "elmish-html": "0.13.0",
-        "elmish-testing-library": "0.4.0",
+        "elmish-hooks": "0.12.0",
+        "elmish-html": "0.14.0",
+        "elmish-testing-library": "0.5.0",
         "email-validate": "7.0.0",
         "encoding": "0.0.10",
         "enums": "6.0.1",
@@ -391,6 +392,7 @@
         "node-path": "5.0.1",
         "node-process": "11.2.0",
         "node-readline": "8.1.1",
+        "node-sqlite": "0.2.0",
         "node-sqlite3": "8.0.0",
         "node-stream-pipes": "2.1.6",
         "node-streams": "9.0.1",
@@ -921,8 +923,8 @@
     },
     "elmish-html": {
       "type": "registry",
-      "version": "0.13.0",
-      "integrity": "sha256-0YIm+aGIBCZ4ifM+4XnSreRuSGw1U2Ahqlw5PNLGCx0=",
+      "version": "0.14.0",
+      "integrity": "sha256-LHJJ1fWPUKCPt3l+Bwa1zzPCBQmiexySmQd0+WrYUnU=",
       "dependencies": [
         "console",
         "effect",
